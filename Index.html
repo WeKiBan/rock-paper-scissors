@@ -7,14 +7,49 @@
 </head>
 <body>
     <script>
-        let selectionArray = ["Rock", "Paper", "Scissors"];
+
         
-        function randomSelector(){
-            
+        
+        function computerPlay(){
+            let selectionArray = ["rock", "paper", "scissors"];
             return selectionArray[Math.floor(Math.random() * (selectionArray.length))];
            
         }
 
+        function playerPlay(){
+            let PlayerSelection = prompt("Choose Rock, Paper or Scissors").toLowerCase().trim();
+            if(PlayerSelection === "rock"|| PlayerSelection == "scissors"|| PlayerSelection =="paper"){
+                return PlayerSelection;
+            } else {
+                alert("invalid answer try again");
+                playerPlay();
+            }
+        }
+
+        function playRound(computerChoice, playerChoice){
+            console.log(computerChoice, playerChoice);
+            
+            if(computerChoice == "rock" && playerChoice == "scissors" || computerChoice === "scissors" && playerChoice == "paper" || computerChoice == "paper" && playerChoice == "rock"){
+                return alert("You lose sucker!");
+            } else if(computerChoice == playerChoice){
+                return alert("it's a draw unbelievable");
+            } else {
+                return alert("Human wins, You live to see another day");
+            }
+            
+
+        }
+        
+        const playerSelection = playerPlay();
+        const computerSelection = computerPlay();
+        
+        playRound(computerSelection, playerSelection);
+        
+        
+        
+        
+        
+        
         
 
     </script>
