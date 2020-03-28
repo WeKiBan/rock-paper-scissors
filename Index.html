@@ -29,15 +29,27 @@
         function playRound(computerChoice, playerChoice){
             console.log(computerChoice, playerChoice);
             
-            if(computerChoice == "rock" && playerChoice == "scissors" || computerChoice === "scissors" && playerChoice == "paper" || computerChoice == "paper" && playerChoice == "rock"){
-                return alert("You lose sucker!");
-            } else if(computerChoice == playerChoice){
-                return alert("it's a draw unbelievable");
+            if(computerChoice == "rock" && playerChoice =="scissors"){
+                return alert("You Lose! Rock beats Scissors!");
+            } else if(computerChoice == "paper" && playerChoice =="rock"){
+                return alert("You Lose! Paper beats Rock!");
+            } else if(computerChoice == "scissors" && playerChoice =="paper"){
+                return alert("You Lose! Scissors beat Paper!");
+            } else if(computerChoice == "scissors" && playerChoice =="rock"){
+                return alert("You Win! Rock beats Scissors!");
+            } else if(computerChoice == "rock" && playerChoice =="Paper"){
+                return alert("You Win! Paper beats Rock!");
+            } else if(computerChoice == "paper" && playerChoice =="scissors"){
+                return alert("You Win! Paper beats Rock!");
             } else {
-                return alert("Human wins, You live to see another day");
+                return alert("It's a draw!!");
             }
-            
+        }
 
+        function game(){
+            for(var i = 0; i < 4; i++){
+                
+            }
         }
         
         const playerSelection = playerPlay();
