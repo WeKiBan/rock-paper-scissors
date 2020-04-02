@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        let computerScore = 0;
+        let playerScore = 0;
+        let round = 0;
+        
+        function computerPlay(){
+            let selectionArray = ["rock", "paper", "scissors"];
+            return selectionArray[Math.floor(Math.random() * (selectionArray.length))];
+           
+        }
+
+        function playerPlay(){
+            let PlayerSelection = prompt(`Round ${round} good luck! \nChoose Rock, Paper or Scissors`)
+            if(PlayerSelection === "rock"|| PlayerSelection == "scissors"|| PlayerSelection =="paper"){
+                return PlayerSelection;
+            } else {
+                alert("invalid answer try again");
+                PlayerSelection = prompt(`Round ${round} good luck! \nChoose Rock, Paper or Scissors`).toLowerCase().trim()
+            }
+        }
+
+        function playRound(){
+            let playerSelection = playerPlay();
+            let computerSelection = computerPlay(); 
+            
+            if(computerSelection == "rock" && playerSelection =="scissors"){
+                    alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nYou Lose! Rock beats Scissors!");
+                    return computerScore += 1;
+            } else if(computerSelection == "paper" && playerSelection =="rock"){
+                    alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nYou Lose! Paper beats Rock!");
+                    return computerScore += 1;
+            } else if(computerSelection == "scissors" && playerSelection =="paper"){
+                    alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nYou Lose! Scissors beat Paper!");
+                    return computerScore += 1;
+            } else if(computerSelection == "scissors" && playerSelection =="rock"){
+                    alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nYou Win! Rock beats Scissors!");
+                    return playerScore += 1;
+            } else if(computerSelection == "rock" && playerSelection =="paper"){
+                    alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nYou Win! Paper beats Rock!");
+                    return playerScore += 1;
+            } else if(computerSelection == "paper" && playerSelection =="scissors"){
+                    alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nYou Win! Paper beats Rock!");
+                    return playerScore += 1;
+            } else {
+                
+                alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nIt's a draw!!");
+                return;
+            }
+        }
+
+        function game(){
+            
+            
+            for(var i = 0; i < 5; i++){
+                round += 1;
+                playRound();
+                alert("Player: " + playerScore + "\nComputer: " + computerScore)
+            }
+
+            if(computerScore > playerScore){
+                return alert("You Lose " + computerScore + " - " + playerScore + " Better look next time!");
+            } else if(playerScore > computerScore) {
+                return alert("You Win " + playerScore + " - " + computerScore + " Who is the daddy!");
+            } else {
+                return alert("It's a draw " + playerScore + " - " + computerScore + " almost!" );
+            }
+            
+
+        }
+        
+        
+        
+        
+        game();
+        
+        
+        
+        
+        
+        
+        
+
+    </script>
+</body>
+</html>
