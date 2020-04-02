@@ -4,90 +4,183 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/366e86972c.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <script>
+    <div id="page-container">
+       
+        <div id="title-container">
+           <h1>Rock Paper Scissors</h1>
+           <p>Let's Play! <br> First to 5 wins!</p>
+        </div>
+       
+        <div id="main-content">
+           
+           <div class="player-container">
+               <p class="player-title">You</p>
+               <div id="rockImg"><i id="playerRock" class="far fa-hand-rock icon fa-5x"></i></div>
+               <div id="paperImg" class="hidden"><i id="playerPaper" class="far fa-hand-paper icon fa-5x"></i></div>
+               <div id="ScissorsImg" class="hidden"><i id="playerScissors" class="far fa-hand-scissors icon fa-5x"></i></div>
+           </div>
+           
+           <div id="score-container">
+            <p class="score-text">Score</p>
+            <p id="score" class="score-text">0 - 0</p>
+           </div>
 
+           <div class="player-container">
+            <p class="player-title">Computer</p>
+            <div id="rockImgComp"><i  class="far fa-hand-rock icon fa-5x"></i></div>
+            <div id="paperImgComp" class="hidden"><i  class="far fa-hand-paper icon fa-5x"></i></div>
+            <div id="ScissorsImgComp" class="hidden"><i  class="far fa-hand-scissors icon fa-5x"></i></div>
+           </div>
+    
+        </div>
+
+        <div id="options-container">
+            
+            <ul id="options-list">
+                <li  class="options-list-item"><i id="chooseRock" class="far fa-hand-rock icon"></i></li>
+                <li  class="options-list-item"><i id="choosePaper" class="far fa-hand-paper icon"></i></li>
+                <li  class="options-list-item"><i id="chooseScissors" class="far fa-hand-scissors icon"></i></li>
+            </ul>
+
+        </div>
+
+
+
+
+
+    </div>
+    
+    
+    <script>
+        
         let computerScore = 0;
         let playerScore = 0;
-        let round = 0;
+        let scoreCounter = document.getElementById('score');
+        let round = 1;
+        let text;
         
+        /* to make a random selection for computer */
         function computerPlay(){
             let selectionArray = ["rock", "paper", "scissors"];
-            return selectionArray[Math.floor(Math.random() * (selectionArray.length))];
+            let computerSelection = selectionArray[Math.floor(Math.random() * (selectionArray.length))];
+            return computerSelection;
            
         }
 
-        function playerPlay(){
-            let PlayerSelection = prompt(`Round ${round} good luck! \nChoose Rock, Paper or Scissors`)
-            if(PlayerSelection === "rock"|| PlayerSelection == "scissors"|| PlayerSelection =="paper"){
-                return PlayerSelection;
-            } else {
-                alert("invalid answer try again");
-                PlayerSelection = prompt(`Round ${round} good luck! \nChoose Rock, Paper or Scissors`).toLowerCase().trim()
-            }
-        }
+        /* to change the rock paper scissors image on the computers side */
+        function changeCompImg(computerSelection){
+            let compRockImg = document.getElementById("rockImgComp");
+            let compPaperImg = document.getElementById("paperImgComp");
+            let compScissorsImg = document.getElementById("ScissorsImgComp");
 
-        function playRound(){
-            let playerSelection = playerPlay();
-            let computerSelection = computerPlay(); 
-            
-            if(computerSelection == "rock" && playerSelection =="scissors"){
-                    alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nYou Lose! Rock beats Scissors!");
-                    return computerScore += 1;
-            } else if(computerSelection == "paper" && playerSelection =="rock"){
-                    alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nYou Lose! Paper beats Rock!");
-                    return computerScore += 1;
-            } else if(computerSelection == "scissors" && playerSelection =="paper"){
-                    alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nYou Lose! Scissors beat Paper!");
-                    return computerScore += 1;
-            } else if(computerSelection == "scissors" && playerSelection =="rock"){
-                    alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nYou Win! Rock beats Scissors!");
-                    return playerScore += 1;
-            } else if(computerSelection == "rock" && playerSelection =="paper"){
-                    alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nYou Win! Paper beats Rock!");
-                    return playerScore += 1;
-            } else if(computerSelection == "paper" && playerSelection =="scissors"){
-                    alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nYou Win! Paper beats Rock!");
-                    return playerScore += 1;
-            } else {
-                
-                alert("You chose " + playerSelection + "\nThe computer chose " + computerSelection + "\nIt's a draw!!");
+            if(computerSelection === 'rock'){
+                compRockImg.classList.remove("hidden");
+                compPaperImg.className = "hidden";
+                compScissorsImg.className = "hidden";
+                return;
+            } else if(computerSelection === 'paper') {
+                compPaperImg.classList.remove("hidden");
+                compRockImg.className = "hidden";
+                compScissorsImg.className = "hidden";
+                return;
+            } else if(computerSelection === 'scissors') {
+                compScissorsImg.classList.remove("hidden");
+                compRockImg.className = "hidden";
+                compPaperImg.className = "hidden";
                 return;
             }
         }
 
-        function game(){
-            
-            
-            for(var i = 0; i < 5; i++){
-                round += 1;
-                playRound();
-                alert("Player: " + playerScore + "\nComputer: " + computerScore)
-            }
+            /* to change the rock paper scissors image on the Players side */
+        
+        function changePlayerImg(playerSelection){
+            let RockImg = document.getElementById("rockImg");
+            let PaperImg = document.getElementById("paperImg");
+            let ScissorsImg = document.getElementById("ScissorsImg");
 
-            if(computerScore > playerScore){
-                return alert("You Lose " + computerScore + " - " + playerScore + " Better look next time!");
-            } else if(playerScore > computerScore) {
-                return alert("You Win " + playerScore + " - " + computerScore + " Who is the daddy!");
-            } else {
-                return alert("It's a draw " + playerScore + " - " + computerScore + " almost!" );
+            if(playerSelection === 'rock'){
+                RockImg.classList.remove("hidden");
+                PaperImg.className = "hidden";
+                ScissorsImg.className = "hidden";
+                return;
+            } else if(playerSelection === 'paper') {
+                PaperImg.classList.remove("hidden");
+                RockImg.className = "hidden";
+                ScissorsImg.className = "hidden";
+                return;
+            } else if(playerSelection === 'scissors') {
+                ScissorsImg.classList.remove("hidden");
+                RockImg.className = "hidden";
+                PaperImg.className = "hidden";
+                return;
             }
-            
+        }
+
+        
+        /* function to play 1 round at a time  */
+        
+        function playRound(playerSelection){
+            let resultText = document.querySelector('#title-container p');
+            let computerSelection = computerPlay();
+            if(computerSelection == "rock" && playerSelection =="scissors"){
+                    resultText.textContent = "You Lose! Rock beats Scissors!";
+                    computerScore += 1;
+            } else if(computerSelection == "paper" && playerSelection =="rock"){
+                    resultText.textContent = "You Lose! Paper beats Rock!";
+                    computerScore += 1;
+                    
+            } else if(computerSelection == "scissors" && playerSelection =="paper"){
+                    resultText.textContent = "You Lose! Scissors beat Paper!";
+                    computerScore += 1;
+            } else if(computerSelection == "scissors" && playerSelection =="rock"){
+                    resultText.textContent = "You Win! Rock beats Scissors!";
+                    playerScore += 1;
+            } else if(computerSelection == "rock" && playerSelection =="paper"){
+                    resultText.textContent = "You Win! Paper beats Rock!";
+                    playerScore += 1;
+        
+            } else if(computerSelection == "paper" && playerSelection =="scissors"){
+                    resultText.textContent = "You Win! Paper beats Rock!";
+                    playerScore += 1;
+            } else {
+                    resultText.textContent = "It's draw!";
+                         
+            }
+             
+        
+                changeCompImg(computerSelection)
+                changePlayerImg(playerSelection)
+                scoreCounter.textContent = `${playerScore} - ${computerScore}`;
+                return;
 
         }
+            
         
         
         
-        
-        game();
-        
-        
-        
-        
-        
-        
-        
+    /* setting event listeners for each of the buttons */
+
+const buttons = Array.from(document.getElementsByClassName('options-list-item'));
+
+buttons.forEach(button => {
+    button.addEventListener('click', function(e){
+        console.log(e.target.getAttribute('id'));
+        if(e.target.getAttribute('id') == 'chooseRock'){
+            playRound('rock');
+        } else if(e.target.getAttribute('id') == 'choosePaper'){
+            playRound('paper');
+        } else {
+            playRound('scissors');
+        }
+    });
+    
+});
 
     </script>
 </body>
