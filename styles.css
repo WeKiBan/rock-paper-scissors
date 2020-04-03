@@ -43,16 +43,16 @@
 #main-content{
     margin-top: 40px;
     display: flex;
-    width: 60%;
-    justify-content: space-between;
-   align-items: center;
+    width:92%;
+    max-width: 800px;
+    justify-content: space-evenly;
 }
 
 .player-container{
     display: flex;
     flex-direction: column;
     text-align: center;
-    
+    width:150px;
 }
 
 .player-title{

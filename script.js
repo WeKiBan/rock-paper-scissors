@@ -1,9 +1,10 @@
      
 let computerScore = 0;
 let playerScore = 0;
-let scoreCounter = document.getElementById('score');
 let round = 1;
-let text;
+let scoreCounter = document.getElementById('score');
+let resultText = document.querySelector('#title-container p');
+let roundText = document.getElementById('round');
 
 /* to make a random selection for computer */
 function computerPlay(){
@@ -67,9 +68,7 @@ function changePlayerImg(playerSelection){
 
 function playRound(playerSelection){
     round += 1;
-    let resultText = document.querySelector('#title-container p');
     let computerSelection = computerPlay();
-    let roundText = document.getElementById('round');
     if(computerSelection == "rock" && playerSelection =="scissors"){
             resultText.textContent = "You Lose! Rock beats Scissors!";
             computerScore += 1;
@@ -88,15 +87,15 @@ function playRound(playerSelection){
             playerScore += 1;
 
     } else if(computerSelection == "paper" && playerSelection =="scissors"){
-            resultText.textContent = "You Win! Paper beats Rock!";
+            resultText.textContent = "You Win! Scissors beat Paper!";
             playerScore += 1;
     } else {
-            resultText.textContent = "It's draw!";
-                 
+         resultText.textContent = "It's draw!";
+                
     }
     changeCompImg(computerSelection);
     changePlayerImg(playerSelection);
-    scoreCounter.textContent = `${playerScore} - ${computerScore}`
+    scoreCounter.textContent = `${playerScore} - ${computerScore}` // changes score counter.
     if(playerScore === 5){
         document.getElementById('options-list').className = 'hidden'; 
         document.getElementById('playAgain').classList.remove('hidden');    
@@ -106,8 +105,8 @@ function playRound(playerSelection){
             document.getElementById('options-list').className = 'hidden';
             return resultText.textContent = 'You lose!';
         }else {
-                roundText.textContent = round;
-        return;
+                
+            return roundText.textContent = round; // changes number of round.
         }
 }
     
